@@ -1,0 +1,43 @@
+
+.toolbar-top {
+    justify-content: space-between;
+}
+
+.login-button {
+    
+}
+
+.card {
+    width: 300px;
+    min-height: 300px;
+    text-align: center;
+    margin: 15px;
+}
+
+.card-header {
+    text-align: left;
+    padding: 10px;
+}
+
+.card-media-image {
+    width: 200px;
+    height: 150px;
+    margin: auto;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content-text {
+    padding: 5px;
+    font-size: 12px;
+}
+
+.card-actions-row {
+    height: 30px;
+}
+
+.card-rating {
+    padding: 20px
+}
