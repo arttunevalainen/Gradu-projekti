@@ -1,57 +1,63 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+
 import './App.css';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { connect } from 'react-redux';
-import { reduxTest } from './state/actions';
 
-import GridColumn from './components/GridColumn';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const gridData = [
-    {id: 1, name: "Fantasy movie", logo: null, date: "2020-02-03", tags: ["Fantasy"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 2, name: "Romantic movie", logo: null, date: "2020-02-09", tags: ["Romance"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 3, name: "Scifi movie", logo: null, date: "2020-02-12", tags: ["Scifi"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 4, name: "Fantasy movie", logo: null, date: "2020-02-03", tags: ["Fantasy"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 5, name: "Romantic movie", logo: null, date: "2020-02-09", tags: ["Romance"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 6, name: "Scifi movie", logo: null, date: "2020-02-12", tags: ["Scifi"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 7, name: "Fantasy movie", logo: null, date: "2020-02-03", tags: ["Fantasy"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 8, name: "Romantic movie", logo: null, date: "2020-02-09", tags: ["Romance"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-    {id: 9, name: "Scifi movie", logo: null, date: "2020-02-12", tags: ["Scifi"], intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis in lacus sit amet rhoncus. Fusce ut tellus nec purus cursus bibendum id vel lorem. Vestibulum tempus congue pretium. Curabitur ut erat eu est sollicitudin commodo.", rating: 5},
-];
+import RecentlyRated from './components/RecentlyRated';
 
 const App = props => {
-    const [loading, setLoading] = useState(true);
+    const [anchorEl, setAnchorEl] = useState(null);
 
-    // Fake loading
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-        return () => clearTimeout(timer);
-    });
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
 
-    if(loading) {
-        return (
-            <div className="App">
-                <CircularProgress/>
-            </div>
-        );
-    }
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-    props.reduxAction();
     return (
-        <div className="App">
-            <GridColumn
-                gridData={gridData}
+        <>
+            <AppBar position="static">
+                <Toolbar className="toolbar-top">
+                <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
+                    <MenuIcon/>
+                </IconButton>
+                <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+
+            <AppMenu
+                anchorEl={anchorEl}
+                handleClose={handleClose}
             />
-        </div>
+        
+            <RecentlyRated/>
+        </>
     );
 }
 
-const mapDispatchToProps = dispatch => ({
-    reduxAction: () => dispatch(reduxTest()),
-});
+const AppMenu = ({anchorEl, handleClose}) => {
+    return (
+        <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+        >
+            <MenuItem onClick={handleClose}>Frontpage</MenuItem>
+            <MenuItem onClick={handleClose}>Recently Rated Movies</MenuItem>
+            <MenuItem onClick={handleClose}>My rated movies</MenuItem>
+        </Menu>
+    );
+}
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(App);
+export default App;

@@ -1,0 +1,33 @@
+
+
+@media screen and (min-width: 1320px) {
+    .recentlyrated-container {
+        width: 1320px;
+        margin: auto;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 1319px) and (min-width: 980px) {
+    .recentlyrated-container {
+        width: 980px;
+        margin: auto;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 979px) and (min-width: 700px) {
+    .recentlyrated-container {
+        width: 650px;
+        margin: auto;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 699px) {
+    .recentlyrated-container {
+        width: 300px;
+        margin: auto;
+        padding: 20px;
+    }
+}

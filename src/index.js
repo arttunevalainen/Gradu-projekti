@@ -5,21 +5,27 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './state';
 import './index.css';
 import App from './App';
-import logger from 'redux-logger';
+import {createLogger} from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 
 import rootSaga from './state/rootSaga';
 
-// create the saga middleware
+// Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
+// Create logger with options.
+const logger = createLogger({
+    collapsed: true
+});
+
+// Create enhancers and apply middleware to redux.
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const enhancer = composeEnhancers(
+    applyMiddleware(sagaMiddleware),
     applyMiddleware(logger),
-    applyMiddleware(sagaMiddleware)
-    // other store enhancers if any
 );
 
+// Create store with root reducers and enhancers
 const store = createStore(
     rootReducer,
     enhancer
@@ -28,6 +34,7 @@ const store = createStore(
 // Run saga.
 sagaMiddleware.run(rootSaga)
 
+// Render app.
 ReactDOM.render(
     <Provider store={store}>
         <App/>
