@@ -10,32 +10,32 @@ import MenuIcon from '@material-ui/icons/Menu';
 import GridCard from './GridCard'
 
 const MovieGrid = props => {
-  const gridRow = props.gridData.map(d => {
-    return (
-      <GridCard
-        xs={3}
-        key={d.id}
-        data={d}
-      />
-    );
-  });
+    const gridRow = props.gridData.map(d => {
+        return (
+            <GridCard
+                xs={3}
+                key={d.id}
+                data={d}
+            />
+        );
+    });
 
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar className="toolbar-top">
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
+        <div>
+            <AppBar position="static">
+                <Toolbar className="toolbar-top">
+                <IconButton edge="start" color="inherit" aria-label="menu">
+                    <MenuIcon />
+                </IconButton>
+                <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
 
-      <Grid container spacing={2}>
-        {gridRow}
-      </Grid>
-    </div>
-  );
+            <Grid container spacing={2}>
+                {gridRow}
+            </Grid>
+        </div>
+    );
 }
 
 export default MovieGrid;
