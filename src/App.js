@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import './App.css';
 
@@ -7,10 +8,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import RecentlyRated from './components/RecentlyRated';
+import AppMenu from './components/AppMenu';
 
 const App = props => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -27,36 +27,32 @@ const App = props => {
         <>
             <AppBar position="static">
                 <Toolbar className="toolbar-top">
-                <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
-                    <MenuIcon/>
-                </IconButton>
-                <Button color="inherit">Login</Button>
+                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
+                        <MenuIcon/>
+                    </IconButton>
+                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
 
-            <AppMenu
-                anchorEl={anchorEl}
-                handleClose={handleClose}
-            />
-        
-            <RecentlyRated/>
-        </>
-    );
-}
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/recentlyrated">
+                        <RecentlyRated/>
+                    </Route>
+                    <Route path="/mymovies">
+                        lol3
+                    </Route>
+                    <Route path="/">
+                        lol
+                    </Route>
+                </Switch>
 
-const AppMenu = ({anchorEl, handleClose}) => {
-    return (
-        <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-        >
-            <MenuItem onClick={handleClose}>Frontpage</MenuItem>
-            <MenuItem onClick={handleClose}>Recently Rated Movies</MenuItem>
-            <MenuItem onClick={handleClose}>My rated movies</MenuItem>
-        </Menu>
+                <AppMenu
+                    anchorEl={anchorEl}
+                    handleClose={handleClose}
+                />
+            </BrowserRouter>
+        </>
     );
 }
 

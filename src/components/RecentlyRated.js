@@ -15,6 +15,7 @@ const Title = styled.h2`
 
 const RecentlyRated = props => {
     const {list, isFetching} = props.recentlyRatedMovies;
+
     useEffect(() => {
         if(list == null) {
             props.fetchRecentlyRatedMovies();

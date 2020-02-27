@@ -10,8 +10,6 @@ export const fetchRecentlyRatedMoviesAction = data => {
 export const fetchRecentlyRatedMoviesSuccess = (gridData) => {
     return {
         type: actionTypes.FETCH_RECENTLY_RATED_MOVIES_SUCCESS,
-        payload: {
-            gridData
-        }
+        payload: {gridData}
     }
 };
