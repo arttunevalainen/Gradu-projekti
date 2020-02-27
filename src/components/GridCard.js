@@ -16,14 +16,17 @@ const GridCard = ({data}) => {
                 title={data.name}
                 subheader={data.date}
             />
+
             <CardMedia
                 className="card-media-image"
                 image={logoSRC}
                 title="ossi"
             />
+
             <CardContent className="card-content">
                 <p className="card-content-text">{data.intro}</p>
             </CardContent>
+
             <CardActions className="card-actions-row">
                 <p className="card-rating">{data.rating} / 5</p>
             </CardActions>

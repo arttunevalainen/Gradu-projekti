@@ -8,6 +8,11 @@ import './RecentlyRated.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GridColumn from './GridColumn';
 
+const Title = styled.h2`
+    font-size: 26px;
+    padding-bottom: 10px;
+`;
+
 const RecentlyRated = props => {
     const {list, isFetching} = props.recentlyRatedMovies;
     useEffect(() => {
@@ -29,11 +34,6 @@ const RecentlyRated = props => {
         </div>
     )
 };
-
-const Title = styled.h2`
-    font-size: 26px;
-    padding-bottom: 10px;
-`
 
 const mapStateToProps = state => {
     const {recentlyRatedMovies} = state.movies;

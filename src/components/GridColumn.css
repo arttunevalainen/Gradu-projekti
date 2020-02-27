@@ -4,11 +4,14 @@
     min-height: 300px;
     text-align: center;
     margin: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-header {
     text-align: left;
     padding: 10px;
+    max-height: 20%;
 }
 
 .card-media-image {
